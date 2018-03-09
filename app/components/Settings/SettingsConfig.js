@@ -5,6 +5,7 @@ import { traduction } from '../../lang/lang';
 import { getConfUri } from '../../services/platform.service';
 import WalletService from '../../services/wallet.service';
 import fs from 'fs';
+import os from 'os';
 import fsPath from 'fs-path';
 const lang = traduction();
 
@@ -190,7 +191,7 @@ class SettingsConfig extends Component {
       this.setState({ staking: /staking=1/g.test(data) });
 
       // staking is not in config at all--update it
-      if (!STAKING_EXISTS_PATTERN.test(data)) {
+      if (STAKING_EXISTS_PATTERN.test(data) === false) {
         this.changeStaking(directory, 0);
       }
     });
@@ -209,7 +210,7 @@ class SettingsConfig extends Component {
       // staking exists in the file--update the value
       // else add it to the end of the file
       var configContents;
-      if (STAKING_EXISTS_PATTERN.test(data)) {
+      if (STAKING_EXISTS_PATTERN.test(data) === true) {
         configContents = data.replace(STAKING_EXISTS_PATTERN, `staking=${staking}`);
       } else {
         configContents = `${data.trim()}${os.EOL}staking=${staking}`;

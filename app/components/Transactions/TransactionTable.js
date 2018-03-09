@@ -50,8 +50,12 @@ class TransactionTable extends Component {
           self.setState({ transactions: data, requesting: false });
         }
       }).catch((err) => {
+
         if (err.message !== 'Loading block index...' && err.message !== 'connect ECONNREFUSED 127.0.0.1:19119') {
-          event.emit('animate', err.message);
+          if(wallet.client !== null){
+            event.emit('animate', err.message);
+          }
+
         }
       });
     }
