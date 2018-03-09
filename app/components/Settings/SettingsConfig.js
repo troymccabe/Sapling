@@ -5,6 +5,7 @@ import { traduction } from '../../lang/lang';
 import { getConfUri } from '../../services/platform.service';
 import WalletService from '../../services/wallet.service';
 import fs from 'fs';
+import os from 'os';
 import fsPath from 'fs-path';
 import os from 'os';
 const lang = traduction();
